@@ -1,0 +1,39 @@
+.bio {
+    resize: none;
+}
+
+.myimage2 {
+    filter: unset;
+    border: solid 2px black;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    object-position: center top;
+    object-fit: cover;
+}
+
+.preview {
+    filter: unset;
+}
+
+input[type=file] {
+    background: white;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: black;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+    background: rgb(49, 49, 49);
+    font-weight: bold;
+}
