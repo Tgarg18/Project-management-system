@@ -10,6 +10,7 @@ import MyProfile from './pages/MyProfile'
 import Myprojects from './pages/Myprojects'
 import SearchProjects from './pages/SearchProjects'
 import ProjectDashboard from './pages/ProjectDashboard'
+import CreateProject from './pages/CreateProject'
 function App() {
 
   return (
@@ -17,9 +18,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path='/' element={<Home />}>
-            <Route path='' element={<ProjectDashboard/>}>
+            <Route path='' element={<ProjectDashboard />}>
               <Route path='' element={<Myprojects />} />
               <Route path='search-projects' element={<SearchProjects />} />
+              <Route path='create-project' element={<CreateProject />} />
             </Route>
             <Route path='myprofile' element={<MyProfile />} />
           </Route>

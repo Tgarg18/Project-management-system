@@ -101,7 +101,7 @@ const loginUser = asyncHandler(async (req, res) => {
             .json(new ApiResponse(401, null, "invalid credentials"))
     }
     const loggedInUser = await User.findById(user._id).select("-password");
-    
+
     const token = jwt.sign({ _id: loggedInUser._id }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1d"
     })
@@ -111,12 +111,19 @@ const loginUser = asyncHandler(async (req, res) => {
             .status(500)
             .json(new ApiResponse(500, null, "Server side error"))
     }
+    return res.status(200).json(
+        {
+            status: 200,
+            message: "User logged in successfully!",
+            user: loggedInUser,
+            token: token
+        }
+    )
+})
 
-    return res
-        .status(200)
-        .json(new ApiResponse(200, {
-            user: loggedInUser
-        }, "User logged in successfully!", token))
+const getCurrentUserData = asyncHandler(async (req,res) => {
+    const user = await User.findById(req.user._id).select("-password")
+    return res.status(200).json(new ApiResponse(200, user, "User data fetched successfully"))
 })
 
 const logoutUser = asyncHandler(async (req, res) => {
@@ -222,5 +229,6 @@ export {
     logoutUser,
     changeCurrentPassword,
     updateAccountDetails,
-    updateUserAvatar
+    updateUserAvatar,
+    getCurrentUserData
 }

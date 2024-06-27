@@ -22,11 +22,11 @@ const Navbar2 = () => {
                                 localStorage.removeItem("token")
                                 localStorage.removeItem("user")
                                 navigate("/login")
-                                }}>
+                            }}>
                                 <li>Logout</li>
                             </button>
                         </ul>
-                    :
+                        :
                         <ul className='flex gap-5'>
                             <NavLink to={'/login'} className={({ isActive }) =>
                                 `no-underline p-1.5 hover:bg-slate-800 hover:rounded-lg ${isActive ? 'border-b-2 border-white' : ''}`

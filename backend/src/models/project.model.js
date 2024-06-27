@@ -11,6 +11,10 @@ const projectSchema = new mongoose.Schema({
     description: {
         type: String
     },
+    projectPhoto: {
+        type: String,
+        default: "https://res.cloudinary.com/wittywebcloud/image/upload/v1719397844/iwlo5fenek8ltimtyu5o.jpg"
+    },
     leader: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

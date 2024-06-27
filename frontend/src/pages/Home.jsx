@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Navbar2 />
-      <div className='w-full bg-black text-white text-lg font-semibold px-10'>
+      <div className='w-full bg-[#3b3b3b] text-white text-lg font-semibold px-10'>
         <Outlet />
       </div>
     </>
