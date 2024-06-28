@@ -37,7 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const token = jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d"
+        expiresIn: "100d"
     })
 
     if (!token) {
@@ -103,7 +103,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const loggedInUser = await User.findById(user._id).select("-password");
 
     const token = jwt.sign({ _id: loggedInUser._id }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "1d"
+        expiresIn: "100d"
     })
 
     if (!token) {
@@ -121,36 +121,20 @@ const loginUser = asyncHandler(async (req, res) => {
     )
 })
 
-const getCurrentUserData = asyncHandler(async (req,res) => {
+const getCurrentUserData = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id).select("-password")
     return res.status(200).json(new ApiResponse(200, user, "User data fetched successfully"))
 })
 
-const logoutUser = asyncHandler(async (req, res) => {
-    await User.findOneAndUpdate(
-        req.user._id,
-        {
-            $unset: {
-                refreshToken: 1
-            }
-        },
-        {
-            new: true
-        }
-    )
-
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
-
-    return res
-        .status(200)
-        .clearCookie("accessToken", options)
-        .clearCookie("refreshToken", options)
-        .json(new ApiResponse(200, {}, "User logged out successfully!"))
-
+const getUserData = asyncHandler(async (req, res) => {
+    const userId = req.params.userId
+    const user = await User.findById(userId).select("-password")
+    return res.status(200).json(new ApiResponse(200, user, "User data fetched successfully"))
 })
+
+
+
+
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     // check if user exists
@@ -226,7 +210,7 @@ export {
     registerUser,
     registerUserStage2,
     loginUser,
-    logoutUser,
+    getUserData,
     changeCurrentPassword,
     updateAccountDetails,
     updateUserAvatar,

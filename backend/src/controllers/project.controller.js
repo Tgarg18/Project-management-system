@@ -26,14 +26,28 @@ const createProject = asyncHandler(async (req, res) => {
 })
 
 const getAllMyProjects = asyncHandler(async (req, res) => {
-    const projects = await Project.find({ leader: req.user._id })
+    const projects = await Project.find({ $or: [{ leader: req.user._id }, { members: req.user._id }] }).populate("leader")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 
 const getAllProjects = asyncHandler(async (req, res) => {
-    const projects = await Project.find()
+    const projects = await Project.find().populate("leader")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 
+const getProjectsCreatedByLoggedInUser = asyncHandler(async (req, res) => {
+    const projects = await Project.find({ leader: req.user._id }).populate("leader")
+    return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
+})
 
-export { createProject,getAllMyProjects,getAllProjects }
+const getProjectsCreatedByUser = asyncHandler(async (req, res) => {
+    const projects = await Project.find({ leader: req.params.userId }).populate("leader")
+    return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
+})
+
+const getprojectById = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.params.projectId).populate("leader members")
+    return res.status(200).json(new ApiResponse(200, project, "Project fetched successfully"))
+})
+
+export { createProject, getAllMyProjects, getProjectsCreatedByUser, getAllProjects, getProjectsCreatedByLoggedInUser, getprojectById }

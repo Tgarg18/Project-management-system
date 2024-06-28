@@ -34,11 +34,26 @@ const SearchProjects = () => {
             (allProjects
               .filter((project) => project.name.toLowerCase().includes(searchQuery.toLowerCase()) || project.name.toLowerCase().includes(searchQuery.toLowerCase()))
               .map((project) => (
-                <div key={project._id}>
-                  <NavLink to={`/project/${project._id}`}>
-                    {project.name}
-                  </NavLink>
-                </div>
+                <NavLink to={`/project/${project._id}`} draggable="false" className={"w-3/5"} key={project._id}>
+                  <div key={project._id} className='flex flex-col items-center justify-center py-3 border hover:rounded-xl'>
+                    <div className='flex justify-center items-center gap-4'>
+                      <img src={project.projectPhoto} className='w-16 h-16 rounded-[50%] object-cover object-center' alt="" />
+                      {project.name}
+                      <div className='text-center text-2xl'>
+                      </div>
+                    </div>
+                    <hr className='w-full mt-2 mb-3' />
+                    <div>
+                      Description: {project.description}
+                    </div>
+                    <div>
+                      Leader: @{project.leader.userName}
+                    </div>
+                    <div>
+                      Number of Members: {project.members.length}
+                    </div>
+                  </div>
+                </NavLink>
               ))
             )
             :

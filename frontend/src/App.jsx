@@ -11,6 +11,8 @@ import Myprojects from './pages/Myprojects'
 import SearchProjects from './pages/SearchProjects'
 import ProjectDashboard from './pages/ProjectDashboard'
 import CreateProject from './pages/CreateProject'
+import OthersProfile from './pages/OthersProfile'
+import Project from './pages/Project'
 function App() {
 
   return (
@@ -24,6 +26,8 @@ function App() {
               <Route path='create-project' element={<CreateProject />} />
             </Route>
             <Route path='myprofile' element={<MyProfile />} />
+            <Route path='user/:userid' element={<OthersProfile />} />
+            <Route path='/project/:projectId' element={<Project />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
