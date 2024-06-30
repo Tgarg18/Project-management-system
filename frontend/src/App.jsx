@@ -13,6 +13,9 @@ import ProjectDashboard from './pages/ProjectDashboard'
 import CreateProject from './pages/CreateProject'
 import OthersProfile from './pages/OthersProfile'
 import Project from './pages/Project'
+import AssignTasks from './pages/AssignTasks'
+import CompletedTasks from './pages/CompletedTasks'
+import MyTasks from './pages/MyTasks'
 function App() {
 
   return (
@@ -27,7 +30,11 @@ function App() {
             </Route>
             <Route path='myprofile' element={<MyProfile />} />
             <Route path='user/:userid' element={<OthersProfile />} />
-            <Route path='/project/:projectId' element={<Project />} />
+            <Route path='/project/:projectId/' element={<Project />} >
+              <Route path='assign-tasks' element={<AssignTasks />} />
+              <Route path='completed-tasks' element={<CompletedTasks />} />
+              <Route path='my-tasks' element={<MyTasks />} />
+            </Route>
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />

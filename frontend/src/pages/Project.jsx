@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, Outlet, useParams } from 'react-router-dom'
 
 const Project = () => {
     const [projectData, setProjectData] = useState({})
@@ -31,8 +31,14 @@ const Project = () => {
                 <div>Leader: @{projectData?.leader?.userName}</div>
                 <div>members: {projectData?.members?.length}</div>
             </div>
-            <p>{projectData?.status}</p>
-            <p>{projectData?.tasks?.map(task => task.title)}</p>
+            <div className='flex justify-evenly items-center w-full'>
+                <NavLink to={'completed-tasks'} className={`text-center`}>Completed Tasks</NavLink>
+                <NavLink to={'my-tasks'} className={`text-center`}>My Tasks</NavLink>
+                <NavLink to={`assign-tasks`} className={`text-center`}>Assign Tasks</NavLink>
+            </div>
+            <div>
+                <Outlet />
+            </div>
         </div>
     )
 }

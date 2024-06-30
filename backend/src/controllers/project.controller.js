@@ -31,7 +31,7 @@ const getAllMyProjects = asyncHandler(async (req, res) => {
 })
 
 const getAllProjects = asyncHandler(async (req, res) => {
-    const projects = await Project.find().populate("leader")
+    const projects = await Project.find().populate("leader members")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 
@@ -46,8 +46,46 @@ const getProjectsCreatedByUser = asyncHandler(async (req, res) => {
 })
 
 const getprojectById = asyncHandler(async (req, res) => {
-    const project = await Project.findById(req.params.projectId).populate("leader members")
+    const project = await Project.findById(req.params.projectId)
+        // .populate("leader members")
+        .populate({ path: 'leader', model: 'User' })
+        .populate({ path: 'members', model: 'User' })
     return res.status(200).json(new ApiResponse(200, project, "Project fetched successfully"))
 })
 
-export { createProject, getAllMyProjects, getProjectsCreatedByUser, getAllProjects, getProjectsCreatedByLoggedInUser, getprojectById }
+const joinProject = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.body.projectId)
+    if (!project) {
+        throw new ApiError(404, "Project not found")
+    }
+    if (project.members.includes(req.user._id)) {
+        throw new ApiError(400, "Already joined")
+    }
+    project.members.push(req.user._id)
+    await project.save()
+    return res.status(200).json(new ApiResponse(200, project, "Project joined successfully"))
+})
+
+const leaveProject = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.body.projectId)
+    if (!project) {
+        throw new ApiError(404, "Project not found")
+    }
+    if (!project.members.includes(req.user._id)) {
+        throw new ApiError(400, "Not joined")
+    }
+    project.members.pull(req.user._id)
+    await project.save()
+    return res.status(200).json(new ApiResponse(200, project, "Project left successfully"))    
+})
+
+export {
+    createProject,
+    getAllMyProjects,
+    getProjectsCreatedByUser,
+    getAllProjects,
+    getProjectsCreatedByLoggedInUser,
+    getprojectById,
+    joinProject,
+    leaveProject
+}

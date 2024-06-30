@@ -14,14 +14,15 @@ const taskSchema = new mongoose.Schema({
         ref: 'Project',
         required: true
     },
+    assignedTo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     status: {
         type: String,
         enum: ['todo', 'in_progress', 'completed'],
         required: true
-    },
-    completedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
     }
 }, {
     timestamps: true
