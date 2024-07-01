@@ -76,7 +76,7 @@ const leaveProject = asyncHandler(async (req, res) => {
     }
     project.members.pull(req.user._id)
     await project.save()
-    return res.status(200).json(new ApiResponse(200, project, "Project left successfully"))    
+    return res.status(200).json(new ApiResponse(200, project, "Project left successfully"))
 })
 
 export {
