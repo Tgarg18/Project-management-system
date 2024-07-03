@@ -29,7 +29,6 @@ const CreateProject = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data.message === "Project created successfully") {
           setProjectName("");
           setProjectDes("");

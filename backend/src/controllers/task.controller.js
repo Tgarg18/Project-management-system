@@ -41,7 +41,7 @@ const incompleteTask = asyncHandler(async (req, res) => {
 })
 
 const getMyTasks = asyncHandler(async (req, res) => {
-    const tasks = await Task.find({ assignedTo: req.user._id })
+    const tasks = await Task.find({ assignedTo: req.user._id, assignedIn: req.params.projectId })
     return res.status(200).json(new ApiResponse(200, tasks, "Tasks fetched successfully"))
 })
 
@@ -49,6 +49,8 @@ const getAllCompletedTasksinProject = asyncHandler(async (req, res) => {
     const tasks = await Task.find({ assignedIn: req.params.projectId, status: "completed" })
     return res.status(200).json(new ApiResponse(200, tasks, "Tasks fetched successfully"))
 })
+
+
 
 export {
     createTask,

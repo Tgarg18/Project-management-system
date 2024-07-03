@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const MyTasks = () => {
   const [taskList, settaskList] = useState([]);
+  const projectId = useParams().projectId
 
   const markAsCompleted = (taskId) => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/mark-as-completed`, {
@@ -14,7 +16,6 @@ const MyTasks = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         settaskList(data.data);
       })
       .catch((error) => {
@@ -23,7 +24,7 @@ const MyTasks = () => {
   }
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/get-my-tasks`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/get-my-tasks/${projectId}`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -31,7 +32,6 @@ const MyTasks = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         settaskList(data.data);
       })
       .catch((error) => {
@@ -42,8 +42,9 @@ const MyTasks = () => {
   return (
     <div>
       <div className='w-full flex flex-col items-center gap-4 mt-5'>
-        {taskList.reverse()
+        {taskList
           .filter((task) => task.status == "in_progress")
+          .reverse()
           .map((task) => (
             <div key={task._id} className='border w-1/2 px-3 py-2'>
               <div className='font-semibold'>{task.title}</div>
@@ -56,8 +57,8 @@ const MyTasks = () => {
           ))}
         {
           taskList
-            .reverse()
             .filter((task) => task.status === "completed")
+            .reverse()
             .map((task) => (
               <div key={task._id} className='border w-1/2'>
                 <div className='font-semibold'>{task.title}</div>

@@ -13,7 +13,6 @@ const Project = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.data);
                 setProjectData(data.data);
             })
             .catch((error) => {
@@ -34,7 +33,12 @@ const Project = () => {
             <div className='flex justify-evenly items-center w-full'>
                 <NavLink to={'completed-tasks'} className={`text-center`}>Completed Tasks</NavLink>
                 <NavLink to={'my-tasks'} className={`text-center`}>My Tasks</NavLink>
-                <NavLink to={`assign-tasks`} className={`text-center`}>Assign Tasks</NavLink>
+                {
+                    (projectData?.leader?._id === JSON.parse(localStorage.getItem('user'))._id) ?
+                        <NavLink to={`assign-tasks`} className={`text-center`}>Assign Tasks</NavLink>
+                        :
+                        null
+                }
             </div>
             <div>
                 <Outlet />

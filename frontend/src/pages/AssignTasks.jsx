@@ -20,7 +20,6 @@ const AssignTasks = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         setProjectMemberList(data.data.members)
       })
   }, [])
@@ -64,13 +63,11 @@ const AssignTasks = () => {
         <label htmlFor="taskDes" className='w-1/6'>Assign Task To</label>
         <select name="assignTo" id="assignTo" className='w-5/6 my-2 px-2 py-2 border border-black rounded-lg text-gray-600' value={assignTo} onChange={(e) => setAssignTo(e.target.value)}>
           <option value="dummy" className='bg-black text-gray-600' hidden>Select User</option>
-          {console.log(projectMemberList)}
           {
             projectMemberList &&
             projectMemberList.map((member) => {
-              { console.log(member) }
               return (
-                <option value={member._id} className='bg-black text-gray-600'>{member.userName}</option>
+                <option key={member._id} value={member._id} className='bg-black text-gray-600'>{member.userName}</option>
               )
             })
           }

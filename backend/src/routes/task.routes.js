@@ -10,7 +10,7 @@ router.route("/mark-as-completed").post(verifyJWT, completeTask)
 
 router.route('/mark-as-incomplete').post(verifyJWT, incompleteTask)
 
-router.route("/get-my-tasks").get(verifyJWT, getMyTasks)
+router.route("/get-my-tasks/:projectId").get(verifyJWT, getMyTasks)
 
 router.route("/getAllCompletedTasksInProject/:projectId").get(verifyJWT, getAllCompletedTasksinProject)
 

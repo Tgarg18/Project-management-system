@@ -51,7 +51,6 @@ const SearchProjects = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         setAllProjects(data.data);
       })
       .catch((error) => {
@@ -93,13 +92,18 @@ const SearchProjects = () => {
                   <div>
                     <NavLink to={`/project/${project._id}`} className={`bg-green-400 py-2 px-3 rounded-xl hover:opacity-80`} draggable="false">View Project</NavLink>
                     {
-                      (project.members.some((member) => member._id == JSON.parse(localStorage.getItem("user"))._id)) ?
-                        <button className={`bg-green-400 py-2 px-3 rounded-xl hover:opacity-80`} onClick={() => leaveProject(project._id)}>Leave Project</button>
+                      (project.leader._id == JSON.parse(localStorage.getItem("user"))._id) ?
+                        null
                         :
-                        project.leader._id == JSON.parse(localStorage.getItem("user"))._id ?
-                          null
-                          :
-                          <button className={`bg-green-400 py-2 px-3 rounded-xl hover:opacity-80`} onClick={() => joinProject(project._id)}>Join Project</button>
+                        (
+                          (project.members.some((member) => member._id == JSON.parse(localStorage.getItem("user"))._id)) ?
+                            <button className={`bg-green-400 py-2 px-3 rounded-xl hover:opacity-80`} onClick={() => leaveProject(project._id)}>Leave Project</button>
+                            :
+                            project.leader._id == JSON.parse(localStorage.getItem("user"))._id ?
+                              null
+                              :
+                              <button className={`bg-green-400 py-2 px-3 rounded-xl hover:opacity-80`} onClick={() => joinProject(project._id)}>Join Project</button>
+                        )
                     }
                   </div>
                 </div>

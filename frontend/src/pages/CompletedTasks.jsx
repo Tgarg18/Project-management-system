@@ -6,7 +6,7 @@ const CompletedTasks = () => {
     const projectId = useParams().projectId
 
     useEffect(() => {
-      fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/get-completed-tasks/${projectId}`, {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/getAllCompletedTasksInProject/${projectId}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -14,7 +14,6 @@ const CompletedTasks = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.data);
           setTaskList(data.data);
         })
         .catch((error) => {
@@ -32,7 +31,6 @@ const CompletedTasks = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.data);
           setTaskList(data.data);
         })
         .catch((error) => {
@@ -42,12 +40,16 @@ const CompletedTasks = () => {
 
   return (
     <div className='w-full flex flex-col items-center gap-4 mt-5'>
-      {taskList.length > 0 && taskList.map((task) => (
+      {taskList.length > 0 && taskList
+      .reverse()
+      .map((task) => (
         <div key={task._id} className='border w-1/2 px-3 py-2'>
           <h2>{task.title}</h2>
           <p>Description: {task.description}</p>
           <p>Status: Completed</p>
+          <div className='flex justify-center items-center'>
           <button className='bg-red-500 text-white px-3 py-1 rounded-xl' onClick={() => markAsIncomplete(task._id)}>Mark as Incomplete</button>
+          </div>
         </div>
       ))}
       {taskList.length === 0 && <p>No completed tasks found</p>}

@@ -40,7 +40,6 @@ const Signup = () => {
         });
 
         const result = await response.json();
-        console.log(result);
         if (result.message === "User created successfully") {
           localStorage.setItem("token", result.token);
           localStorage.setItem("user", JSON.stringify(result.user));
@@ -50,19 +49,16 @@ const Signup = () => {
           toast.error(result.message || 'Registration failed');
         }
       } catch (error) {
-        console.error('Error:', error);
         toast.error('An error occurred. Please try again.');
       }
     } else {
       toast.error("Passwords don't match");
-      console.log("Passwords don't match");
     }
   };
 
   const onSubmit2 = async () => {
     if (bio === "" && !avatar) {
       toast.error("Please fill at least one of the fields");
-      console.log("Please fill at least one of the fields");
       return;
     }
 
@@ -82,15 +78,12 @@ const Signup = () => {
       });
 
       const result = await response.json();
-      console.log(result);
       if (result.message === "User updated successfully") {
         localStorage.setItem("user", JSON.stringify(result.user));
         toast.success("Update successful");
         navigate('/');
-        console.log('Success:', result);
       } else {
         toast.error(result.message || 'Update failed');
-        console.log('Error:', result.message || 'Update failed');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -102,7 +95,7 @@ const Signup = () => {
     <>
       <Navbar1 />
       {stage === 1 ? (
-        <div className='w-full mt-10 flex justify-center items-center'>
+        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../src/assets/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl'>
             <h2 className='text-2xl text-center font-semibold'>Signup to ManageMate</h2>
             <NavLink to={'/login'} className={`w-full hover:underline`} draggable={false}>
@@ -137,7 +130,7 @@ const Signup = () => {
           </form>
         </div>
       ) : (
-        <div className='w-full mt-10 flex justify-center items-center'>
+        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../src/assets/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <form className='w-3/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl'>
             <div className='flex items-center'>
               <label htmlFor="bio" className='font-semibold'>Write a short bio</label>

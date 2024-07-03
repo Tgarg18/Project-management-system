@@ -15,7 +15,6 @@ const MyProfile = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         setUserData(data.data);
       })
       .catch((error) => {
@@ -33,7 +32,6 @@ const MyProfile = () => {
       .then((response) => response.json())
       .then((data) => {
         setProjectCreatedByLoggedinUser(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error('Error:', error);

@@ -44,9 +44,9 @@ const Login = () => {
     return (
         <>
             <Navbar1 />
-            <div className='w-full mt-10 flex justify-center items-center'>
-                <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl transform hover:rotate-y-(20deg)'>
-                    <h2 className='text-2xl text-center font-semibold'>Login to ManageMate</h2>
+            <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../src/assets/background.jpg')`,backgroundPosition: 'center',backgroundRepeat: 'no-repeat',backgroundSize: 'cover'}}>
+                <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl shadow-black'>
+                    <h2 className='text-2xl text-center font-bold'>Login to ManageMate</h2>
                     <NavLink to={'/signup'} className={`w-full hover:underline`} draggable={false}>
                         <p className='text-center my-2 w-full'>Don't have an account? Signup</p>
                     </NavLink>
