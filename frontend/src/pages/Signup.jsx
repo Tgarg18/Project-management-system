@@ -5,6 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { toast } from "react-toastify";
+import background from '../../public/background.jpg';
 
 const Signup = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -95,7 +96,7 @@ const Signup = () => {
     <>
       <Navbar1 />
       {stage === 1 ? (
-        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../../public/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl  shadow-black'>
             <h2 className='text-2xl text-center font-semibold'>Signup to ManageMate</h2>
             <NavLink to={'/login'} className={`w-full hover:underline`} draggable={false}>
@@ -130,7 +131,7 @@ const Signup = () => {
           </form>
         </div>
       ) : (
-        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../../public/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url(${background})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
           <form className='w-3/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl shadow-black'>
             <div className='flex items-center'>
               <label htmlFor="bio" className='font-semibold'>Write a short bio</label>

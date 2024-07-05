@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import Navbar1 from '../components/Navbar1'
 import { useForm } from 'react-hook-form'
 import { NavLink,useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { toast } from "react-toastify";
+import background from '../../public/background.jpg'
 
 const Login = () => {
 
@@ -44,7 +44,7 @@ const Login = () => {
     return (
         <>
             <Navbar1 />
-            <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../../public/background.jpg')`,backgroundPosition: 'center',backgroundRepeat: 'no-repeat',backgroundSize: 'cover'}}>
+            <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url(${background})`,backgroundPosition: 'center',backgroundRepeat: 'no-repeat',backgroundSize: 'cover'}}>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl shadow-black'>
                     <h2 className='text-2xl text-center font-bold'>Login to ManageMate</h2>
                     <NavLink to={'/signup'} className={`w-full hover:underline`} draggable={false}>
