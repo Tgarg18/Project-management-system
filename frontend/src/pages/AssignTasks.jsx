@@ -48,7 +48,7 @@ const AssignTasks = () => {
   }
 
   return (
-    <div>
+    <div className='px-10'>
       <div className='flex items-center w-full'>
         <label htmlFor="taskTitle" className='w-1/6'>Title</label>
         <input type="text" placeholder="Enter task title" value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} required autoComplete="off" className='w-5/6 my-2 px-2 py-2 border border-black rounded-lg text-gray-700' />
@@ -67,7 +67,7 @@ const AssignTasks = () => {
             projectMemberList &&
             projectMemberList.map((member) => {
               return (
-                <option key={member._id} value={member._id} className='bg-black text-gray-600'>{member.userName}</option>
+                <option key={member._id} value={member._id} className='bg-white text-gray-600 font-semibold'>{member.userName}</option>
               )
             })
           }

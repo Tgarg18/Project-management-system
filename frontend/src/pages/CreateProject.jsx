@@ -10,7 +10,7 @@ const CreateProject = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
-    if(projectName === "" || projectDes === "") {
+    if (projectName === "" || projectDes === "") {
       toast.error("Please fill all the fields");
       return;
     }

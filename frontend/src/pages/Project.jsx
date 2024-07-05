@@ -27,17 +27,24 @@ const Project = () => {
                 <p>{projectData?.description}</p>
             </div>
             <div className='flex flex-col justify-center items-center'>
-                <div>Leader: @{projectData?.leader?.userName}</div>
-                <div>members: {projectData?.members?.length}</div>
+                <NavLink to={JSON.parse(localStorage.getItem('user'))._id === projectData?.leader?._id ? `/myprofile` : `/user-profile/${projectData?.leader?._id}`}>
+                    <div>Leader: @{projectData?.leader?.userName}</div>
+                </NavLink>
+                <div>Members: {projectData?.members?.length}</div>
             </div>
             <div className='flex justify-evenly items-center w-full'>
-                <NavLink to={'completed-tasks'} className={`text-center`}>Completed Tasks</NavLink>
-                <NavLink to={'my-tasks'} className={`text-center`}>My Tasks</NavLink>
+                <NavLink to={'completed-tasks'} className={({ isActive }) =>
+                    `no-underline text-center ${isActive ? 'border-b-2 border-white' : ''}`
+                }>Completed Tasks</NavLink>
                 {
                     (projectData?.leader?._id === JSON.parse(localStorage.getItem('user'))._id) ?
-                        <NavLink to={`assign-tasks`} className={`text-center`}>Assign Tasks</NavLink>
+                        <NavLink to={`assign-tasks`} className={({ isActive }) =>
+                            `no-underline text-center ${isActive ? 'border-b-2 border-white' : ''}`
+                        }>Assign Tasks</NavLink>
                         :
-                        null
+                        <NavLink to={'my-tasks'} className={({ isActive }) =>
+                            `no-underline text-center ${isActive ? 'border-b-2 border-white' : ''}`
+                        }>My Tasks</NavLink>
                 }
             </div>
             <div>

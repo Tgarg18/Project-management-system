@@ -16,6 +16,8 @@ import Project from './pages/Project'
 import AssignTasks from './pages/AssignTasks'
 import CompletedTasks from './pages/CompletedTasks'
 import MyTasks from './pages/MyTasks'
+import EditProfile from './pages/EditProfile'
+import ChangePassword from './pages/ChangePassword'
 function App() {
 
   return (
@@ -29,7 +31,9 @@ function App() {
               <Route path='create-project' element={<CreateProject />} />
             </Route>
             <Route path='myprofile' element={<MyProfile />} />
-            <Route path='user/:userid' element={<OthersProfile />} />
+            <Route path='edit-profile' element={<EditProfile />} />
+            <Route path='change-password' element={<ChangePassword />} />
+            <Route path='user-profile/:userid' element={<OthersProfile />} />
             <Route path='/project/:projectId/' element={<Project />} >
               <Route path='assign-tasks' element={<AssignTasks />} />
               <Route path='completed-tasks' element={<CompletedTasks />} />

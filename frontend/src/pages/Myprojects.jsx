@@ -27,7 +27,10 @@ const Myprojects = () => {
       </div>
       <div className='flex flex-col justify-center items-center'>
         {
-          myProjects.map((project) => (
+          myProjects?.length === 0 && <div className='text-center text-white'>No projects found.</div>
+        }
+        {
+          myProjects?.map((project) => (
             <NavLink to={`/project/${project._id}`} draggable="false" className={"w-3/5"} key={project._id}>
               <div key={project._id} className='flex flex-col items-center justify-center py-3 border hover:rounded-xl'>
                 <div className='flex justify-center items-center gap-4'>

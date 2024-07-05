@@ -64,8 +64,6 @@ const registerUserStage2 = asyncHandler(async (req, res) => {
 
     const avatar = await uploadCloudinary(avatarLocalPath)
 
-    console.log(bio)
-    console.log(avatar)
     const updateduser = await User.findByIdAndUpdate(req.user._id, {
         bio,
         avatar: avatar?.url || "https://res.cloudinary.com/wittywebcloud/image/upload/v1718627988/userimage_hwokq2.png"
@@ -132,9 +130,31 @@ const getUserData = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, user, "User data fetched successfully"))
 })
 
+const removeProfilePhoto = asyncHandler(async (req, res) => {
+    const userId = req.body.userid;
+    const user = await User.findByIdAndUpdate(userId, {
+        avatar: "https://res.cloudinary.com/wittywebcloud/image/upload/v1718627988/userimage_hwokq2.png"
+    }, { new: true })
+    return res.status(200).json(new ApiResponse(200, user, "Profile photo removed successfully"))
+})
 
+const changeUserData = asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const { bio } = req.body;
 
+    let avatarLocalPath;
+    if (req.file) {
+        avatarLocalPath = req.file.path;
+    }
 
+    const avatar = await uploadCloudinary(avatarLocalPath)
+
+    const user = await User.findByIdAndUpdate(userId, {
+        bio,
+        avatar: avatar?.url
+    }, { new: true })
+    return res.status(200).json(new ApiResponse(200, user, "User data updated successfully"))
+})
 
 const changeCurrentPassword = asyncHandler(async (req, res) => {
     // check if user exists
@@ -156,63 +176,13 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, {}, "Password changed successfully!"))
 })
 
-const updateAccountDetails = asyncHandler(async (req, res) => {
-    const { fullName, email } = req.body;
-
-    if (!fullName || !email) {
-        throw new ApiError(400, "All fields are required")
-    }
-
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $set: {
-                fullName,
-                email
-            }
-        },
-        { new: true }
-    ).select("-password")
-
-    return res
-        .status(200)
-        .json(new ApiResponse(200, user, "Account details updated successfully"))
-})
-
-const updateUserAvatar = asyncHandler(async (req, res) => {
-    const avatarLocalPath = req.file?.path;
-    if (!avatarLocalPath) {
-        throw new ApiError(400, "Avatar is required")
-    }
-
-    const avatar = await uploadCloudinary(avatarLocalPath)
-
-    if (!avatar.url) {
-        throw new ApiError(400, "Error while uploading avatar")
-    }
-
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $set: {
-                avatar: avatar.url
-            }
-        },
-        { new: true }
-    ).select("-password")
-
-    return res
-        .status(200)
-        .json(new ApiResponse(200, user, "Avatar updated successfully"))
-})
-
 export {
     registerUser,
     registerUserStage2,
     loginUser,
     getUserData,
     changeCurrentPassword,
-    updateAccountDetails,
-    updateUserAvatar,
-    getCurrentUserData
+    getCurrentUserData,
+    removeProfilePhoto,
+    changeUserData
 }

@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Navbar2 />
-      <div className='w-full bg-[#3b3b3b] text-white text-lg font-semibold px-10'>
+      <div className='w-full text-white text-lg font-semibold h-[92vh] overflow-scroll px-10' style={{ backgroundImage: `url('../src/assets/background2.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
         <Outlet />
       </div>
     </>

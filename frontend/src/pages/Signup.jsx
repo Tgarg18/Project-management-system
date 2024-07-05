@@ -96,7 +96,7 @@ const Signup = () => {
       <Navbar1 />
       {stage === 1 ? (
         <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../src/assets/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
-          <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl'>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-1/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl  shadow-black'>
             <h2 className='text-2xl text-center font-semibold'>Signup to ManageMate</h2>
             <NavLink to={'/login'} className={`w-full hover:underline`} draggable={false}>
               <p className='text-center my-2 w-full'>Already have an account? Login</p>
@@ -131,7 +131,7 @@ const Signup = () => {
         </div>
       ) : (
         <div className='w-full pt-10 h-[calc(92vh)] flex justify-center items-center' style={{ backgroundImage: `url('../src/assets/background.jpg')`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
-          <form className='w-3/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl'>
+          <form className='w-3/4 border-2 border-black rounded-xl py-3 px-10 shadow-2xl shadow-black'>
             <div className='flex items-center'>
               <label htmlFor="bio" className='font-semibold'>Write a short bio</label>
               <textarea id="bio" cols="30" rows="5" className='bio w-full my-2 px-2 py-2 border border-black rounded-lg' value={bio} onChange={(e) => setBio(e.target.value)} placeholder='Write a short bio'></textarea>

@@ -6,7 +6,7 @@ const Navbar2 = () => {
     const navigate = useNavigate()
     return (
         <>
-            <nav className='w-full h-12 bg-black text-white text-lg font-semibold flex items-center justify-between px-10'>
+            <nav className='w-full h-[8vh] bg-black text-white text-lg font-semibold flex items-center justify-between px-10 sticky top-0'>
                 <NavLink to={'/'} draggable={false}>
                     ManageMate
                 </NavLink>
