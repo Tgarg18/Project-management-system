@@ -26,7 +26,7 @@ const createProject = asyncHandler(async (req, res) => {
 })
 
 const getAllMyProjects = asyncHandler(async (req, res) => {
-    const projects = await Project.find({ $or: [{ leader: req.user._id }, { members: req.user._id }] }).populate("leader")
+    const projects = await Project.find({ $or: [{ leader: req.user._id }, { members: req.user._id }] }).populate("leader members")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 
@@ -36,12 +36,12 @@ const getAllProjects = asyncHandler(async (req, res) => {
 })
 
 const getProjectsCreatedByLoggedInUser = asyncHandler(async (req, res) => {
-    const projects = await Project.find({ leader: req.user._id }).populate("leader")
+    const projects = await Project.find({ leader: req.user._id }).populate("leader members")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 
 const getProjectsCreatedByUser = asyncHandler(async (req, res) => {
-    const projects = await Project.find({ leader: req.params.userId }).populate("leader")
+    const projects = await Project.find({ leader: req.params.userId }).populate("leader members")
     return res.status(200).json(new ApiResponse(200, projects, "Projects fetched successfully"))
 })
 

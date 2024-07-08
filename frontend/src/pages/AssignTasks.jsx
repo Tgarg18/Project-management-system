@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from "react-toastify";
 
 const AssignTasks = () => {
 
@@ -41,6 +42,10 @@ const AssignTasks = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        toast.success("Task assigned successfully")
+        setTaskDes("")
+        setTaskTitle("")
+        setAssignTo("")
       })
       .catch((error) => {
         console.error('Error:', error);

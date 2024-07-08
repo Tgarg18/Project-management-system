@@ -21,16 +21,16 @@ const ChangePassword = () => {
     const saveChangedPassword = () => {
         const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         if (newpassword != confirmnewpassword) {
-            notifySame()
-            setNewpassword("")
-            setConfirmnewpassword("")
-            return
+            notifySame();
+            setNewpassword("");
+            setConfirmnewpassword("");
+            return;
         }
         else if (!(passwordRegex.test(newpassword))) {
-            notifyPassword()
-            setNewpassword("")
-            setConfirmnewpassword("")
-            return
+            notifyPassword();
+            setNewpassword("");
+            setConfirmnewpassword("");
+            return;
         }
         else {
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/change-password`, {
@@ -71,12 +71,12 @@ const ChangePassword = () => {
                             {(showpassword) ?
                                 <>
                                     <input type='text' value={newpassword} onChange={(e) => setNewpassword(e.target.value)} className="bio2 mx-0 w-full py-2 px-1 pr-11 rounded" placeholder='Enter your new Password' />
-                                    <VisibilityIcon className="me absolute right-3" style={{cursor: 'pointer' }} onClick={() => setShowpassword(!showpassword)} />
+                                    <VisibilityIcon className="me absolute right-3" style={{ cursor: 'pointer' }} onClick={() => setShowpassword(!showpassword)} />
                                 </>
                                 :
                                 <>
                                     <input type='password' value={newpassword} onChange={(e) => setNewpassword(e.target.value)} className="bio2 mx-0 w-full py-2 pr-11 px-1 rounded" placeholder='Enter your new Password' />
-                                    <VisibilityOffIcon className="me absolute right-3" style={{cursor: 'pointer' }} onClick={() => setShowpassword(!showpassword)} />
+                                    <VisibilityOffIcon className="me absolute right-3" style={{ cursor: 'pointer' }} onClick={() => setShowpassword(!showpassword)} />
                                 </>
                             }
                         </div>
@@ -87,12 +87,12 @@ const ChangePassword = () => {
                             {(showcpassword) ?
                                 <>
                                     <input type='text' value={confirmnewpassword} onChange={(e) => setConfirmnewpassword(e.target.value)} className="bio2 mx-0 w-full py-2 px-1 pr-11 rounded" placeholder='Re-enter your Password' />
-                                    <VisibilityIcon className="me absolute right-3" style={{cursor: 'pointer' }} onClick={() => setShowcpassword(!showcpassword)} />
+                                    <VisibilityIcon className="me absolute right-3" style={{ cursor: 'pointer' }} onClick={() => setShowcpassword(!showcpassword)} />
                                 </>
                                 :
                                 <>
                                     <input type='password' value={confirmnewpassword} onChange={(e) => setConfirmnewpassword(e.target.value)} className="bio2 mx-0 w-full py-2 px-1 pr-11 rounded" placeholder='Re-enter your Password' />
-                                    <VisibilityOffIcon className="me absolute right-3" style={{cursor: 'pointer' }} onClick={() => setShowcpassword(!showcpassword)} />
+                                    <VisibilityOffIcon className="me absolute right-3" style={{ cursor: 'pointer' }} onClick={() => setShowcpassword(!showcpassword)} />
                                 </>
                             }
                         </div>

@@ -25,6 +25,21 @@ const Signup = () => {
   };
 
   const onSubmit = async (data) => {
+    const userNameRegex = new RegExp("^[A-Za-z][A-Za-z0-9_]{7,29}$");
+    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!(emailRegex.test(data.email))) {
+      toast.error("Invalid Email. Please enter a valid email address");
+      return;
+    }
+    if (!(userNameRegex.test(data.username))) {
+      toast.error("Invalid Username. Username must start with an alphabet, all other characters can be alphabets, numbers or an underscore and length should be between 8-30 characters");
+      return;
+    }
+    if (!(passwordRegex.test(data.password))) {
+      toast.error("Invalid Password. Password must contain at least one uppercase letter, one lowercase letter, one number, one special character and length should be between 8-30 characters");
+      return;
+    }
     if (data.password === data.cpassword) {
       try {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/users/register`, {

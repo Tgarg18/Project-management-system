@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from "react-toastify";
 
 const CompletedTasks = () => {
     const [taskList, setTaskList] = useState([])
     const projectId = useParams().projectId
+    const navigate = useNavigate();
 
     useEffect(() => {
       fetch(`${import.meta.env.VITE_BACKEND_URL}api/v1/tasks/getAllCompletedTasksInProject/${projectId}`, {
@@ -32,6 +34,8 @@ const CompletedTasks = () => {
         .then((response) => response.json())
         .then((data) => {
           setTaskList(data.data);
+          toast.success("Task marked as incomplete successfully");
+          navigate("/assign-tasks");
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -41,8 +45,8 @@ const CompletedTasks = () => {
   return (
     <div className='w-full flex flex-col items-center gap-4 mt-5'>
       {taskList.length > 0 && taskList
-      .reverse()
-      .map((task) => (
+      ?.reverse()
+      ?.map((task) => (
         <div key={task._id} className='border w-1/2 px-3 py-2'>
           <h2>{task.title}</h2>
           <p>Description: {task.description}</p>
@@ -52,7 +56,7 @@ const CompletedTasks = () => {
           </div>
         </div>
       ))}
-      {taskList.length === 0 && <p>No completed tasks found</p>}
+      {taskList?.length === 0 && <p>No completed tasks found</p>}
     </div>
   )
 }
